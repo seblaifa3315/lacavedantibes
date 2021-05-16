@@ -1,0 +1,34 @@
+export const ADD_REDS = "ADD_REDS";
+export const REDS_LOADING = "REDS_LOADING";
+export const REDS_FAILED = "REDS_FAILED";
+
+export const ADD_WHITES = "ADD_WHITES";
+export const WHITES_LOADING = "WHITES_LOADING";
+export const WHITES_FAILED = "WHITES_FAILED";
+
+export const ADD_ROSES = "ADD_ROSES";
+export const ROSES_LOADING = "ROSES_LOADING";
+export const ROSES_FAILED = "ROSES_FAILED";
+
+export const ADD_CHAMPAGNES = "ADD_CHAMPAGNES";
+export const CHAMPAGNES_LOADING = "CHAMPAGNES_LOADING";
+export const CHAMPAGNES_FAILED = "CHAMPAGNES_FAILED";
+
+export const ADD_DIGESTIVES = "ADD_DIGESTIVES";
+export const DIGESTIVES_LOADING = "DIGESTIVES_LOADING";
+export const DIGESTIVES_FAILED = "DIGESTIVES_FAILED";
+
+export const ADD_OILS = "ADD_OILS";
+export const OILS_LOADING = "OILS_LOADING";
+export const OILS_FAILED = "OILS_FAILED";
+
+export const ADD_CATEGORIES = "ADD_CATEGORIES";
+export const CATEGORIES_LOADING = "CATEGORIES_LOADING";
+export const CATEGORIES_FAILED = "CATEGORIES_FAILED";
+
+export const ADD_CART = "ADD_CART";
+export const ADD_CARTS = "ADD_CARTS";
+export const CART_LOADING = "CART_LOADING";
+export const CART_FAILED = "CART_FAILED";
+export const DELETE_ITEM = "DELETE_ITEM";
+export const UPDATE_CART = "UPDATE_CART";
