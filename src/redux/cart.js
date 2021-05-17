@@ -28,7 +28,6 @@ export const Cart = (
             const index = state.cart.findIndex(item => item.name === action.payload.name);
             const newArray = [...state.cart];
             newArray.splice(index, 1, newObject);
-            console.log(newArray);
             return {...state, errMess: null, cart: newArray};
         case ActionTypes.DELETE_ITEM:
             return { ...state, errMess: null, cart: state.cart.filter(el => el.id !== action.payload.id) };
