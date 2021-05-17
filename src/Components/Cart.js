@@ -31,7 +31,8 @@ import { deleteItem, editCart } from "../redux/ActionCreators";
 
 const mapDispatchToProps = {
     deleteItem: (item) => deleteItem(item),
-    editCart: (name, quantity, price, image, id) => editCart(name, quantity, price, image, id)
+    editCart: (name, quantity, price, image, id) =>
+        editCart(name, quantity, price, image, id),
 };
 
 const mapStateToProps = (state) => {
@@ -61,11 +62,17 @@ class RenderCartItem extends Component {
     }
 
     handleConfirm() {
-        editCart(this.props.item.name, this.state.quantity, this.props.item.price, this.props.item.image, this.props.item.id)
+        this.props.editCart(
+            this.props.item.name,
+            this.state.quantity,
+            this.props.item.price,
+            this.props.item.image,
+            this.props.item.id
+        );
     }
 
     handleDelete() {
-        deleteItem(this.props.item);
+        this.props.deleteItem(this.props.item);
         console.log(this.props.item);
     }
 
@@ -153,7 +160,7 @@ class Cart extends Component {
         this.toggleModal();
     }
 
-    render() { 
+    render() {
         const cartItems = this.props.cart.cart.map((cartItem) => {
             return (
                 <RenderCartItem

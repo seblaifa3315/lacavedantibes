@@ -372,20 +372,21 @@ export const postCart = (name, quantity, price, image) => (dispatch) => {
 
 // ---------------------------------Edit cart -------------------------------------
 
-export const updateCart = (cart) => ({
+export const updateCart = (item) => ({
     type: ActionTypes.UPDATE_CART,
-    payload: cart,
+    payload: item,
 });
 
-export const editCart = (name, quantity, price, image, id) => {
+export const editCart = (name, newQuantity, price, image, idInCart) => dispatch => {
     const newObject = {
         name: name,
-        quantity: parseInt(quantity),
+        quantity: parseInt(newQuantity),
         price: price,
         image: image,
+        id: idInCart
     };
 
-    return fetch(baseUrl + `cart/${id}`, {
+    return fetch(baseUrl + `cart/${idInCart}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -409,15 +410,14 @@ export const editCart = (name, quantity, price, image, id) => {
             }
         )
         .then((response) => response.json())
-        .then((response) => console.log(response))
-        // .then((response) => updateCart(response))
-        // .catch((error) => {
-        //     console.log("update cart item", error.message);
-        //     alert(
-        //         "Your item could not be updated from the cart\nError: " +
-        //             error.message
-        //     );
-        // });
+        .then(dispatch(updateCart(newObject)))
+        .catch((error) => {
+            console.log("update cart item", error.message);
+            alert(
+                "Your item could not be updated from the cart\nError: " +
+                    error.message
+            );
+        });
 };
 
 // ---------------------------------Delete cart -------------------------------------
@@ -426,7 +426,7 @@ export const removeItem = (item) => ({
     payload: item
 });
 
-export const deleteItem = (item)  => dispatch => {
+export const deleteItem = (item) => dispatch => {
 
     return fetch(baseUrl + `cart/${item.id}`, {
         method: "DELETE",
@@ -452,7 +452,7 @@ export const deleteItem = (item)  => dispatch => {
             }
         )
         .then((response) => response.json())
-        .then((item) => dispatch(removeItem(item)))
+        .then(dispatch((removeItem(item))))
         .catch((error) => {
             console.log("delete cart item", error.message);
             alert(

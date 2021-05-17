@@ -25,7 +25,11 @@ export const Cart = (
             return { ...state, isLoading: false, errMess: action.payload };
         case ActionTypes.UPDATE_CART:
             const newObject = action.payload;
-            return {...state, errMess: null, cart: state.cart.concat(newObject) };
+            const index = state.cart.findIndex(item => item.name === action.payload.name);
+            const newArray = [...state.cart];
+            newArray.splice(index, 1, newObject);
+            console.log(newArray);
+            return {...state, errMess: null, cart: newArray};
         case ActionTypes.DELETE_ITEM:
             return { ...state, errMess: null, cart: state.cart.filter(el => el.id !== action.payload.id) };
         default:
