@@ -73,7 +73,7 @@ class RenderCartItem extends Component {
 
     handleDelete() {
         this.props.deleteItem(this.props.item);
-        console.log(this.props.item);
+        console.log(this.props.item.quantity);
     }
 
     render() {
@@ -103,7 +103,7 @@ class RenderCartItem extends Component {
                                 id="quantity"
                                 name="quantity"
                                 placeholder={this.state.quantity}
-                                value={this.state.quantity}
+                                value={this.props.item.quantity}
                                 onChange={this.handleQuantity}
                             />
                         </div>

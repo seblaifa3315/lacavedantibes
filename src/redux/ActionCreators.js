@@ -5,7 +5,7 @@ import { baseUrl } from "../shared/baseUrl";
 export const fetchReds = () => (dispatch) => {
     dispatch(redsLoading());
 
-    return fetch(baseUrl + "reds")
+    return fetch(baseUrl + "shop/Reds")
         .then(
             (response) => {
                 if (response.ok) {
@@ -46,7 +46,7 @@ export const addReds = (reds) => ({
 export const fetchWhites = () => (dispatch) => {
     dispatch(whitesLoading());
 
-    return fetch(baseUrl + "whites")
+    return fetch(baseUrl + "shop/Whites")
         .then(
             (response) => {
                 if (response.ok) {
@@ -251,7 +251,7 @@ export const addOils = (oils) => ({
 export const fetchCategories = () => (dispatch) => {
     dispatch(categoriesLoading());
 
-    return fetch(baseUrl + "categories")
+    return fetch(baseUrl + "shop")
         .then(
             (response) => {
                 if (response.ok) {
@@ -377,58 +377,58 @@ export const updateCart = (item) => ({
     payload: item,
 });
 
-export const editCart = (name, newQuantity, price, image, idInCart) => dispatch => {
-    const newObject = {
-        name: name,
-        quantity: parseInt(newQuantity),
-        price: price,
-        image: image,
-        id: idInCart
-    };
+export const editCart =
+    (name, newQuantity, price, image, idInCart) => (dispatch) => {
+        const newObject = {
+            name: name,
+            quantity: parseInt(newQuantity),
+            price: price,
+            image: image,
+            id: idInCart,
+        };
 
-    return fetch(baseUrl + `cart/${idInCart}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newObject),
-    })
-        .then(
-            (response) => {
-                if (response.ok) {
-                    return response;
-                } else {
-                    const error = new Error(
-                        `Error ${response.status}: ${response.statusText}`
-                    );
-                    error.response = response;
+        return fetch(baseUrl + `cart/${idInCart}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newObject),
+        })
+            .then(
+                (response) => {
+                    if (response.ok) {
+                        return response;
+                    } else {
+                        const error = new Error(
+                            `Error ${response.status}: ${response.statusText}`
+                        );
+                        error.response = response;
+                        throw error;
+                    }
+                },
+                (error) => {
                     throw error;
                 }
-            },
-            (error) => {
-                throw error;
-            }
-        )
-        .then((response) => response.json())
-        .then(dispatch(updateCart(newObject)))
-        .catch((error) => {
-            console.log("update cart item", error.message);
-            alert(
-                "Your item could not be updated from the cart\nError: " +
-                    error.message
-            );
-        });
-};
+            )
+            .then((response) => response.json())
+            .then(dispatch(updateCart(newObject)))
+            .catch((error) => {
+                console.log("update cart item", error.message);
+                alert(
+                    "Your item could not be updated from the cart\nError: " +
+                        error.message
+                );
+            });
+    };
 
 // ---------------------------------Delete cart -------------------------------------
 export const removeItem = (item) => ({
     type: ActionTypes.DELETE_ITEM,
-    payload: item
+    payload: item,
 });
 
-export const deleteItem = (item) => dispatch => {
-
-    return fetch(baseUrl + `cart/${item.id}`, {
+export const deleteItem = (item) => (dispatch) => {
+    return fetch(baseUrl + `cart`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
@@ -452,7 +452,7 @@ export const deleteItem = (item) => dispatch => {
             }
         )
         .then((response) => response.json())
-        .then(dispatch((removeItem(item))))
+        .then(dispatch(removeItem(item)))
         .catch((error) => {
             console.log("delete cart item", error.message);
             alert(
@@ -461,4 +461,3 @@ export const deleteItem = (item) => dispatch => {
             );
         });
 };
-

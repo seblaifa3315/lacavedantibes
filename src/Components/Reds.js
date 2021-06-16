@@ -57,13 +57,10 @@ class RenderCard extends Component {
             parseFloat(this.props.item.price),
             this.props.item.image
         );
-        console.log(this.props.item.price);
+        console.log(this.props.item);
 
         let totalPrice =
             parseFloat(this.props.item.price) * this.state.quantity;
-        alert(
-            `you added ${this.state.quantity} bottle(s) of ${this.props.item.name} at ${this.props.item.price} the bottle or total of ${totalPrice}€`
-        );
 
         this.resetForm();
     }

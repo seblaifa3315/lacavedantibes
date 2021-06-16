@@ -25,12 +25,18 @@ export const Cart = (
             return { ...state, isLoading: false, errMess: action.payload };
         case ActionTypes.UPDATE_CART:
             const newObject = action.payload;
-            const index = state.cart.findIndex(item => item.name === action.payload.name);
+            const index = state.cart.findIndex(
+                (item) => item.name === action.payload.name
+            );
             const newArray = [...state.cart];
             newArray.splice(index, 1, newObject);
-            return {...state, errMess: null, cart: newArray};
+            return { ...state, errMess: null, cart: newArray };
         case ActionTypes.DELETE_ITEM:
-            return { ...state, errMess: null, cart: state.cart.filter(el => el.id !== action.payload.id) };
+            return {
+                ...state,
+                errMess: null,
+                cart: state.cart.filter((el) => el._id !== action.payload._id),
+            };
         default:
             return state;
     }
