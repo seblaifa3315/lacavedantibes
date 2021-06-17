@@ -378,16 +378,17 @@ export const updateCart = (item) => ({
 });
 
 export const editCart =
-    (name, newQuantity, price, image, idInCart) => (dispatch) => {
+    (name, newQuantity, price, image, _id) => (dispatch) => {
         const newObject = {
             name: name,
             quantity: parseInt(newQuantity),
             price: price,
             image: image,
-            id: idInCart,
+            _id: _id,
         };
+        console.log(newObject)
 
-        return fetch(baseUrl + `cart/${idInCart}`, {
+        return fetch(baseUrl + `cart`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

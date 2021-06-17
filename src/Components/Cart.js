@@ -67,7 +67,7 @@ class RenderCartItem extends Component {
             this.state.quantity,
             this.props.item.price,
             this.props.item.image,
-            this.props.item.id
+            this.props.item._id
         );
     }
 
@@ -103,7 +103,7 @@ class RenderCartItem extends Component {
                                 id="quantity"
                                 name="quantity"
                                 placeholder={this.state.quantity}
-                                value={this.props.item.quantity}
+                                value={this.state.quantity}
                                 onChange={this.handleQuantity}
                             />
                         </div>
@@ -164,7 +164,7 @@ class Cart extends Component {
         const cartItems = this.props.cart.cart.map((cartItem) => {
             return (
                 <RenderCartItem
-                    key={cartItem.id}
+                    key={cartItem._id}
                     item={cartItem}
                     deleteItem={this.props.deleteItem}
                     editCart={this.props.editCart}
